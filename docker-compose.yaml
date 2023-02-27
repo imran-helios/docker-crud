@@ -1,0 +1,17 @@
+services:
+  api:
+    image: helios_crud
+    build: ./helios-crud        
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./helios-crud:/helios-crud
+
+  web:
+    image: react_crud
+    build: ./react-crud
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./react-crud:/react-crud
+      - ./react-crud/node_modules

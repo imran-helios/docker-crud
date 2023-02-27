@@ -1,0 +1,33 @@
+"""helios_crud URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path,include
+from crud import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.add_show,name="addandshow"),
+    path('signup/', views.sign_up, name="signup"),
+    path('login/', views.user_login, name="login"),
+    path('logout/', views.user_logout, name="logout"),
+    path('update/<int:id>/', views.update_data, name="updatedata"),
+    path('delete/<int:id>/', views.delete_data, name="deletedata"),
+    path('contact/<int:id>/', views.details_data, name="detailsdata"),
+
+    path('',include('crud.api.urls'))
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
